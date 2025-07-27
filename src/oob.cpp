@@ -11,6 +11,8 @@
 #include "datagram.h"
 #include "oob.h"
 
+unsigned long serverchallenge = 0;
+unsigned long _ourchallenge = 0;
 
 OOB::OOB()
 {
@@ -65,8 +67,9 @@ bool OOB::ReceiveQueryPacketGetChallenge(
 	chan->connectstep = 3;
 	long magicnumber = recvdata.ReadLong();
 
-	unsigned long serverchallenge = recvdata.ReadLong();
+	serverchallenge = recvdata.ReadLong();
 	*ourchallenge = recvdata.ReadLong();
+	_ourchallenge = *ourchallenge;
 	unsigned long authprotocol = recvdata.ReadLong();
 
 
@@ -100,7 +103,7 @@ bool OOB::ReceiveQueryPacketGetChallenge(
 
 	writeconnect.WriteString(nickname); //nick
 	writeconnect.WriteString(password); // pass
-	writeconnect.WriteString("2000"); // game version
+	writeconnect.WriteString("2025.03.26"); // game version
 
 
 	unsigned char steamkey[STEAM_KEYSIZE];

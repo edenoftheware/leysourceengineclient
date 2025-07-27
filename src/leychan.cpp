@@ -15,6 +15,7 @@
 
 #include "netmsghandlers/net_messages.h"
 #include "netmsghandlers/svc_messages.h"
+#include "netmsghandlers/net/net_disconnect.h"
 
 #define _ShouldChecksumPackets true
 #define _showdrop true
@@ -165,6 +166,9 @@ void leychan::Initialize()
 
 	net_nop* nop = new net_nop;
 	nop->Register(this);
+
+	net_disconnect* disconnect = new net_disconnect;
+	disconnect->Register(this);
 
 	net_file* file = new net_file;
 	file->Register(this);
@@ -994,7 +998,7 @@ void leychan::SetSignonState(int state, int servercount)
 	this->GetSendData()->WriteUBitLong(6, 6);
 	this->GetSendData()->WriteByte(state);
 	this->GetSendData()->WriteLong(this->m_iServerCount);
-
+	
 }
 
 void leychan::ProcessServerInfo(unsigned short protocolversion, int count)

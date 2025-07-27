@@ -10,6 +10,9 @@ class leynet_udp;
 class Datagram;
 class Steam;
 
+extern unsigned long serverchallenge;
+extern unsigned long _ourchallenge;
+
 class OOB
 {
 private:

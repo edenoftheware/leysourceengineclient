@@ -55,7 +55,7 @@ int doreceivethink()
 
 	if (!strstr(serverip.c_str(), charip))
 	{
-		printf("ip mismatch\n");
+		printf("ip mismatch: serverip: %s, charip %s\n", serverip.c_str(), charip);
 		return 0;
 	}
 
@@ -173,7 +173,6 @@ int doreceivethink()
 	return 1;
 }
 
-
 int dosendthinkloading()
 {
 
@@ -210,9 +209,9 @@ int dosendthinkloading()
 		printf("Sending clc_ClientInfo\n");
 		netchan.GetSendData()->WriteUBitLong(8, 6);
 		netchan.GetSendData()->WriteLong(netchan.m_iServerCount);
-		netchan.GetSendData()->WriteLong(-1260710316);//clc_ClientInfo crc
-		netchan.GetSendData()->WriteOneBit(1);//ishltv
-		netchan.GetSendData()->WriteLong(1337);
+		netchan.GetSendData()->WriteLong(4114261126);//clc_ClientInfo crc NOTE: for some reason the one displayed by net_showmsg is off by 8192
+		netchan.GetSendData()->WriteOneBit(0);//ishltv
+		netchan.GetSendData()->WriteLong(steam->GetSteamUser()->GetSteamID().ConvertToUint64());
 		netchan.GetSendData()->WriteUBitLong(0, 21);
 
 		datagram->Send(&netchan);
