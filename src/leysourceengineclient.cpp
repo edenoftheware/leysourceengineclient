@@ -209,7 +209,7 @@ int dosendthinkloading()
 		printf("Sending clc_ClientInfo\n");
 		netchan.GetSendData()->WriteUBitLong(8, 6);
 		netchan.GetSendData()->WriteLong(netchan.m_iServerCount);
-		netchan.GetSendData()->WriteLong(4114261126);//clc_ClientInfo crc NOTE: for some reason the one displayed by net_showmsg is off by 8192
+		netchan.GetSendData()->WriteLong(-180706170);//clc_ClientInfo crc NOTE: for some reason the one displayed by net_showmsg is off by 8192
 		netchan.GetSendData()->WriteOneBit(0);//ishltv
 		netchan.GetSendData()->WriteLong(steam->GetSteamUser()->GetSteamID().ConvertToUint64());
 		netchan.GetSendData()->WriteUBitLong(0, 21);
